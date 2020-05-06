@@ -1,8 +1,7 @@
 def maximo(*valores):
   "Retorna maior valor numérico passado nos argumentos"
   max = valores[0]
-  for i in range(len(valores)):
-    val = valores[i]
+  for val in valores:
     if max <= val:
       max = val
   return max
