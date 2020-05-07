@@ -6,4 +6,5 @@ def maximo(*valores):
       max = val
   return max
 
-print(maximo(1,2,3,4,5,6,7,2,3,5,3,10,2,4,1,0))
+print(maximo(3,4,1))
+print(maximo(0,-1,-5))

@@ -1,3 +1,5 @@
+input = int(input("Digite um número: "))
+
 def maior_primo(max=0):
   "Retorna o maior número primo passado até o valor do argumento"
 
@@ -17,4 +19,4 @@ def maior_primo(max=0):
     if primo(val):
       return val
 
-print(maior_primo(100))
+print(maior_primo(input))
