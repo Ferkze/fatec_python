@@ -13,13 +13,21 @@ class Bola:
 	def calcularDiametro(self):
 		return self.raio * 2
 
+	def mostrarRaio(self):
+		print(self.raio)
+
+	def mostrarDiametro(self):
+		print(self.calcularDiametro())
+
 	def estourar(self):
 		self.raio = 0
 		print('Bola {}: Puff!'.format(self.cor))
 
 # Teste da Classe
 
-bola = Bola()
+bola = Bola(5)
 bola.trocaCor("Azul")
 bola.mostraCor()
+bola.mostrarDiametro()
 bola.estourar()
+bola.mostrarRaio()
