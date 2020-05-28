@@ -3,15 +3,19 @@ import math
 class Retangulo():
 	'Define um Retangulo'
 
-	def __init__(self, lado):
-		self.setLado(lado)
+	def __init__(self, lado1, lado2):
+		self.setLados(lado1, lado2)
 		self.cor = ''
 
-	def setLado(self, lado):
-		self.lado = lado
+	def setLados(self, lado1, lado2):
+		self.lado1 = lado1
+		self.lado2 = lado2
 
-	def getLado(self):
-		return self.lado
+	def getLado1(self):
+		return self.lado1
+
+	def getLado2(self):
+		return self.lado2
 
 	def calculaArea(self):
 		return self.lado1 * self.lado2
@@ -29,26 +33,26 @@ class Retangulo():
 			print('Retangulo {}'.format(self.cor))
 
 	def cabeNaCaixa(self, area = 100):
-		quantidade = area / self.calculaArea
+		quantidade = area / self.calculaArea()
 		if quantidade < 1:
 			print('O Retangulo não cabe na caixa')
 			return
 
-		resto = area % self.lado
+		resto = area % self.calculaArea()
 		if resto == 0:
 			print('{} x Retangulo cabe perfeitamente na caixa'.format(quantidade))
 		else:
 			print('{} x Retangulo cabe na caixa, porém sobra {} de espaço'.format(math.floor(quantidade), resto))
 
-retangulo1 = Retangulo(5)
+retangulo1 = Retangulo(5, 2)
 retangulo1.trocaCor('Preto')
 retangulo1.mostraCor()
 retangulo1.cabeNaCaixa(100)
 
-retangulo2 = Retangulo(7)
+retangulo2 = Retangulo(7, 5)
 retangulo2.mostraCor()
 retangulo2.cabeNaCaixa(100)
 
-retangulo3 = Retangulo(120)	
+retangulo3 = Retangulo(120, 2)	
 retangulo3.mostraCor()
 retangulo3.cabeNaCaixa(100)
