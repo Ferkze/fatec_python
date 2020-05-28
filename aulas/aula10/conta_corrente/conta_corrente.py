@@ -5,6 +5,12 @@ class ContaCorrente:
 		self.alterarNome(nomeCorrentista)
 		self.saldo = saldo
 
+	def getNumero(self):
+		return self.numero
+
+	def getSaldo(self):
+		return self.saldo
+
 	def alterarNome(self, nomeCorrentista):
 		self.nomeCorrentista = nomeCorrentista
 
@@ -26,9 +32,9 @@ class ContaCorrente:
 		
 		if conta.recebeTransferencia(valor):
 			self.saldo -= valor
-			return 'Transferencia bem sucedida'
+			return 'Transferencia bem sucedida para a conta {}'.format(conta.getNumero())
 
-		return 'Transferencia mal sucedida'
+		return 'Transferencia mal sucedida para a conta {}'.format(conta.getNumero())
 
 	def recebeTransferencia(self, valor):
 		if valor <= 0:
@@ -39,10 +45,14 @@ class ContaCorrente:
 
 conta = ContaCorrente(100, 'Tales')
 conta.deposito(100)
-print(conta.saldo)
+print(conta.getSaldo())
 conta.saque(200)
-print(conta.saldo)
+print(conta.getSaldo())
+juros = conta.calculaJurosDeSaldoNegativo(0.01)
+print('Juros diários de {} para o saldo negativo'.format(juros))
 
 conta2 = ContaCorrente(200, 'Fabio', 200)
 resultado = conta2.enviaTransferencia(conta, 150)
 print(resultado)
+
+print('Saldo da conta {}: {}'.format(conta.getNumero(), conta.getSaldo()))
