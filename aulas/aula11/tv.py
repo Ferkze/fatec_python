@@ -1,8 +1,8 @@
 class TV:
-
+	'Classe TV'
 	def __init__(self, marca, tipo, volume = 0, brilho = 10, canal = 0):
-		self.marca = self.setMarca(marca)
-		self.tipo = self.setTipo(tipo)
+		self.setMarca(marca)
+		self.setTipo(tipo)
 		self.volume = volume
 		self.brilho = brilho
 		self.setCanal(canal)
