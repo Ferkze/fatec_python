@@ -1,23 +1,29 @@
 class TV:
 
-	def __init__(self, marca, tipo):
+	def __init__(self, marca, tipo, volume = 0, brilho = 10, canal = 0):
 		self.marca = self.setMarca(marca)
 		self.tipo = self.setTipo(tipo)
-		self.volume = 0
-		self.brilho = 10
-		self.setCanal(0)
+		self.volume = volume
+		self.brilho = brilho
+		self.setCanal(canal)
 
 	def setMarca(self, marca):
 		'Configura a marca da TV'
-		if (marca not in ['Philips', 'Semp Toshiba', 'TCL', 'Samsung']):
-			return
-		self.marca = marca
+		if marca == '':
+			self.marca = 'Não especificado'
+		elif (marca not in ['Philips', 'Semp Toshiba', 'TCL', 'Samsung']):
+			self.marca = 'Marca desconhecida'
+		else:
+			self.marca = marca
 
 	def setTipo(self, tipo):
 		'Configura o tipo da TV'
-		if (tipo not in ['LED', 'Plasma', 'OLED', 'LCD']):
-			return
-		self.tipo = tipo
+		if tipo == '':
+			self.tipo = 'Não especificado'
+		elif (tipo not in ['LED', 'Plasma', 'OLED', 'LCD']):
+			self.tipo = 'Tipo desconhecido'
+		else:
+			self.tipo = tipo
 
 	def setCanal(self, canal):
 		'Seleciona o canal passado de 0 a 100'
@@ -46,7 +52,7 @@ class TV:
 			self.brilho -= 1
 
 # TESTE DA CLASSE
-tv = TV('Samsung', 'LCD')
+tv = TV('Samsung', 'LCD', volume=63, brilho=8, canal=13)
 tv.setCanal(10)
 tv.aumentaVolume()
 tv.aumentaVolume()
