@@ -27,6 +27,9 @@ class Macaco:
 
     def passarMal(self):
         'Cagar elimina todos os dejetos do intestino'
+        if (len(self.bucho) > 0):
+            self.intestino.append(self.bucho)
+            self.bucho.clear()
         if (len(self.intestino) > 0):
             print('Mega pooping of %d items' % len(self.intestino))
 
@@ -42,13 +45,13 @@ macaco1.verBucho()
 macaco1.comer('Banana')
 macaco1.verBucho()
 macaco1.vomitar()
-macaco1.verBucho()
 macaco1.comer('Abacaxi')
 macaco1.digerir()
 macaco1.verBucho()
 macaco2.comer('Maca')
+macaco2.digerir()
 macaco2.cagar()
 macaco2.comer('Banaca')
+macaco2.comer('Xuxu')
 macaco2.comer(macaco1)
 macaco2.passarMal()
-macaco2.verBucho()
