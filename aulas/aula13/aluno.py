@@ -1,13 +1,20 @@
 from pprint import pprint
 
+alunos = set()
+
 
 class Aluno:
     def __init__(self, nome, idade, peso, altura, salario=0):
+        if self in alunos:
+            print('Já é aluno cadastrado')
+            return
+
         self.nome = nome
         self.idade = idade
         self.peso = peso
         self.altura = altura
         self.salario = salario
+        alunos.add(self)
 
     def engordar(self, peso):
         try:
@@ -49,10 +56,18 @@ class Aluno:
     def demissao(self):
         self.salario = 0
 
-    def aumentarSalarioPercentual(self, percentual):
-        if percentual <= 0:
+    def aumentarSalarioPercentual(self, taxa):
+        allowedRaises = set((0.05, 0.1, 0.15, 0.2, 0.25, 0.3))
+        if taxa <= 0:
             return
-        self.salario *= (1+percentual)
+        if taxa in allowedRaises:
+            self.salario *= (1+taxa)
+        else:
+            print('Aumento de {} não permitido, somente esses percentuais: {}'.format(
+                taxa, allowedRaises))
+
+    def graduar(self):
+        alunos.remove(self)
 
 
 douglas = Aluno('Douglas Duarte', 43, 67.0, 167)
@@ -72,8 +87,15 @@ pprint(vars(douglas))
 
 fabio = Aluno('Fabio Martins', 19, 72.0, 172, 11200)
 fabio.aumentarSalarioPercentual(0.2)
+fabio.aumentarSalarioPercentual(0.4)
 pprint(vars(fabio))
 fabio.demissao()
 fabio.setSalario(15000)
 fabio.emagrecer('-10')
 pprint(vars(fabio))
+
+print(alunos)
+
+fabio.graduar()
+
+print(alunos)
