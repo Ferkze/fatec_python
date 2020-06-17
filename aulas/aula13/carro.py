@@ -1,11 +1,34 @@
+marcas = set((
+    'Fiat',
+    'Mercedes',
+    'Ferrari',
+    'Volkswagen'
+))
+
+marcasCaras = set((
+    'Mercedes',
+    'Ferrari'
+))
+
+
 class Carro:
 
-    def __init__(self, quilometrosLitro):
+    def __init__(self, marca, quilometrosLitro):
         self.quilometrosLitro = quilometrosLitro
         self.qtdeCombustivel = 0
         self.distancia_proximo_reparo = 400
         self.percorrido = 0
         self.quebrado = False
+        if marca not in marcas:
+            print('Marca {} não permitida, opcoes validas: {}'.format(marca, marcas))
+            marca = ''
+        self.marca = marca
+
+    def setMarca(self, marca):
+        if marca not in marcas:
+            print('Marca {} não permitida, opcoes validas: {}'.format(marca, marcas))
+            return
+        self.marca = marca
 
     def adicionarGasolina(self, quantidade):
         try:
@@ -44,15 +67,18 @@ class Carro:
         print('autonomia:', self.quilometrosLitro * self.qtdeCombustivel)
         return self.quilometrosLitro * self.qtdeCombustivel
 
-    def ajustarProximoReparo(self):
+    def ajustarProximoReparo(self, proximo=400):
         'Ajusta o próximo reparo para +400km'
-        self.distancia_proximo_reparo = self.percorrido + 400
+        self.distancia_proximo_reparo = self.percorrido + proximo
 
     def quebrar(self):
         'Quebra o carro, impossibilitando ele de andar'
-        print('Quebrou!!!')
-        self.distancia_proximo_reparo = 0
-        self.quebrado = True
+        print('Quebrou !!!')
+        if not marcasCaras.issuperset(set((self.marca))):
+            self.distancia_proximo_reparo = 0
+            self.quebrado = True
+        else:
+            print('Carro de marca cara não quebra, se safou dessa vez...')
 
     def reparar(self):
         'Repara o carro'
@@ -61,7 +87,7 @@ class Carro:
 
 
 # TESTE DA CLASSE
-meuFusca = Carro(15)
+meuFusca = Carro('Volkswagen', 15)
 # 15 quilometros por litro de combustivel.
 meuFusca.adicionarGasolina(20)
 # abastece com 20 litros de combustivel.
@@ -81,7 +107,9 @@ meuFusca.reparar()
 meuFusca.andar(50)
 print('Cheguei')
 
-car = Carro(-1)
+car = Carro('Renault', -1)
+car.setMarca('Ferrari')
 car.andar(100)
 car.adicionarGasolina(50)
 car.andar('50')
+car.quebrar()
