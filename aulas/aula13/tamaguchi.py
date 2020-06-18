@@ -1,3 +1,19 @@
+alimentos = set((
+    'Pão',
+    'Gosma',
+    'Sujeira',
+    'Barata'
+))
+alimentos_ruins = set((
+    'Pão'
+))
+alimentos_bons = set((
+    'Gosma',
+    'Sujeira',
+    'Barata'
+))
+
+
 class Tamagushi:
 
     def __init__(self, nome, fome, saude, idade):
@@ -35,8 +51,17 @@ class Tamagushi:
 
     def alimentar(self, alimento):
         'Alimenta o Tamagushi com o parâmetro alimento e diminui sua fome'
-        self.fome -= 1
-        print('Yum yum %s!' % alimento)
+        if alimento in alimentos:
+            self.fome -= 1
+            if alimento in alimentos_bons:
+                print('Yum yum %s!' % alimento)
+            elif alimento in alimentos_ruins:
+                self.fome += 2
+                print('Bleh %s!' % alimento)
+
+        else:
+            print('Tamagushi não conhece o alimento %s, agora conhce' % alimento)
+            alimentos.add(alimento)
 
     def crescer(self):
         'Faz o Tamagushi crescer aumentando a idade dele'
