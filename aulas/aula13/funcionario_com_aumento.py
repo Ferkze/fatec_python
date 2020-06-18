@@ -1,3 +1,6 @@
+endividados = set()
+
+
 class Funcionario:
 
     def __init__(self, nome, salario, divida=0.0):
@@ -29,6 +32,7 @@ class Funcionario:
                 raise Exception
             if self.salario < divida:
                 self.nome = "*{} [Nome sujo]".format(self.nome)
+                endividados.add(self.nome)
             self.divida += divida
         except Exception:
             print('Endividamento de pessoa com nome sujo não é possível')
@@ -40,12 +44,15 @@ class Funcionario:
         if self.salario < self.divida:
             print('Incapaz de pagar dívida com salário de %.2f' % self.salario)
         else:
+            endividados.remove(self.nome)
             self.nome = self.nome[1:-11]
             print('Dívida de %.2f foi paga' % self.divida)
             self.divida = 0
 
     def empregar(self, salario):
         'Emprega o funcionário, dando-lhe um salário'
+        if self.nome in endividados:
+            print('Funcionário na merda, cuidado!')
         self.salario = salario
 
 
