@@ -1,7 +1,30 @@
+especies_conhecidas = set((
+    'orangotango',
+    'prego',
+    'gibão'
+))
+
+especies_vivas = set((
+    'orangotango',
+    'prego'
+))
+
+especies_extintas = set((
+    'gibão'
+))
+
+
 class Macaco:
 
-    def __init__(self, nome):
+    def __init__(self, nome, especie):
         self.nome = nome
+        if especie not in especies_conhecidas:
+            print('Nova espécie encontrada:', especie)
+            especies_conhecidas.add(especie)
+        if especie in especies_extintas:
+            print('Espécie %s considerada extinta voltou a aparecer' % especie)
+            especies_extintas.remove(especie)
+        self.especie = especie
         self.bucho = []
         self.intestino = []
 
@@ -34,6 +57,14 @@ class Macaco:
             print('Mega pooping of %d items' % len(self.intestino))
 
         self.intestino.clear()
+
+    def morrer(self):
+        'Cagar elimina todos os dejetos do intestino'
+        especies_vivas.remove(self.especie)
+
+    def extinguir(self):
+        'Cagar elimina todos os dejetos do intestino'
+        especies_extintas.add(self.especie)
 
 
 # Teste
